@@ -1,0 +1,13 @@
+# fired when the game starts
+on_game_start = {
+	events = {
+		juggernaut_admirals.13 # flag mod as installed
+	}
+}
+
+# fired when loading a single-player game
+on_single_player_save_game_load = {
+	events = {
+		juggernaut_admirals.13 # flag mod as installed
+	}
+}

@@ -1,0 +1,48 @@
+namespace = juggernaut_admirals
+
+# flag mod as active
+event = {
+	id = juggernaut_admirals.13
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_global_flag = juggernaut_admirals_installed }
+	}
+	immediate = {
+		set_global_flag = juggernaut_admirals_installed
+	}
+}
+
+country_event = {
+	id = juggernaut_admirals.1
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_owned_leader = {
+			limit = {
+				leader_class = admiral
+				is_idle = yes
+			}
+			save_event_target_as = chosen_admiral
+			log = "[chosen_admiral.GetName] selected as Admiral"
+		}
+		random_owned_fleet = {
+			limit = {
+				is_ship_class = shipclass_starbase
+				is_ship_size = juggernaut
+			}
+			save_event_target_as = chosen_juggernaut
+			log = "[chosen_juggernaut.GetName] selected as target Juggernaut"
+		}
+		if = {
+			limit = {
+				exists = event_target:chosen_admiral
+				exists = event_target:chosen_juggernaut
+			}
+			event_target:chosen_juggernaut = { assign_leader = event_target:chosen_admiral }
+		}
+		else = {
+			log = "either Admiral or Juggernaut not found"
+		}
+	}
+}
